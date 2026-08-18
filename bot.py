@@ -201,7 +201,8 @@ async def process_download(callback: CallbackQuery, state: FSMContext):
     output_file = None
     try:
         if action == "dl_video":
-            ydl_opts = {'format': 'best[ext=mp4]/best', 'outtmpl': 'downloads/%(id)s.%(ext)s', 'max_filesize': 50 * 1024 * 1024}
+            ydl_opts = {'cookiefile': 'www.youtube.com_cookies.txt',
+                'format': 'best[ext=mp4]/best', 'outtmpl': 'downloads/%(id)s.%(ext)s', 'max_filesize': 50 * 1024 * 1024}
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=True)
                 output_file = ydl.prepare_filename(info)
@@ -209,6 +210,7 @@ async def process_download(callback: CallbackQuery, state: FSMContext):
             
         elif action == "dl_audio":
             ydl_opts = {
+                'cookiefile': 'www.youtube.com_cookies.txt',
                 'format': 'bestaudio/best',
                 'outtmpl': 'downloads/%(id)s.%(ext)s',
                 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}]
