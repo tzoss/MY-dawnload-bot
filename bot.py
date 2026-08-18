@@ -233,7 +233,7 @@ async def process_download(callback: CallbackQuery, state: FSMContext):
                 os.remove(output_file)
             except:
                 pass
-try:
+    try:
         await callback.answer()
     except:
         pass
