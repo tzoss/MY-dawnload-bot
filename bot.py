@@ -233,8 +233,10 @@ async def process_download(callback: CallbackQuery, state: FSMContext):
                 os.remove(output_file)
             except:
                 pass
-
-    await callback.answer()
+try:
+        await callback.answer()
+    except:
+        pass
 
 async def main():
     if not os.path.exists("downloads"):
